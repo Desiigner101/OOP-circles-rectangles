@@ -1,0 +1,138 @@
+public class AppliedDataStruct extends Parent{
+
+    public AppliedDataStruct(int size, int elements[]){
+        super(size, elements);
+
+    }
+
+    public void reversal(int elements[], int size){
+        int i;
+        int temp;
+
+        for(i = 0; i < size / 2; i++){
+            temp = elements[i];
+            elements[i] = elements[size - i - 1];
+            elements[ size - i - 1] = temp;
+        }
+    }
+
+    public void sort(int elements[], int size){
+        int i, j;
+        int temp;
+
+        for(i = 0; i < size - 1; i++){
+            for(j = 0; j < size - i - 1; j++){
+                if(elements[j] > elements[j + 1]){
+                    temp = elements[j];
+                    elements[j] = elements[j + 1];
+                    elements[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public float Median(int elements[], int size){
+        if(size % 2 == 0){
+            return (elements[size / 2] + elements[size / 2 - 1])/ 2.0f;
+        }else{
+            return elements[size / 2];
+        }
+    }
+
+    public int Max(int elements[], int size){
+        int i; 
+        int max = elements[0];
+
+        for(i = 0; i < size; i++){
+            if(elements[i] > max){
+                max = elements[i];
+            }
+        }
+
+        return max;
+    }
+
+    public void processChoice(int choice, int elements[], int size){
+        switch(choice){
+            case 1:
+            reversal(elements, size);
+            break;
+
+            default:
+            System.out.print("Invalid...");
+
+        }
+    }
+}
+
+
+
+
+
+import java.util.Scanner;
+
+public class mainmain {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int size;
+
+        System.out.print("Enter the size of the array: ");
+        size = scan.nextInt();
+
+        int elements[] = new int[size];
+        
+        printScan get = new printScan(size, null);
+        AppliedDataStruct form = new AppliedDataStruct(size, elements);
+
+        System.out.println("Enter the elements of the array:");
+        get.scanElements(size, elements);
+
+        System.out.println("The elements of the array:");
+        get.printElements(size, elements);
+
+        System.out.println("\n\nReversed array:");
+        form.reversal(elements, size);
+        get.printElements(size, elements);
+
+        System.out.println("\nThe sorted array:");
+        form.sort(elements, size);
+        get.printElements(size, elements);
+
+        float getMedian = form.Median(elements, size);
+        System.out.printf("\nThe median is %.2f", getMedian);
+
+        int getMax = form.Max(elements, size);
+        System.out.printf("\nThe max value is %d", getMax);
+
+        scan.close();
+    }
+}
+
+
+
+import java.util.Scanner;
+
+public class printScan extends Parent{
+    Scanner scan = new Scanner(System.in);
+    
+    public printScan(int size, int elements[]){
+        super(size, elements);
+    }
+    
+    public void printElements(int elements[]){
+        int i; 
+
+        for(i = 0; i < size; i++){
+            System.out.print(elements[i] + " ");
+        }
+    }
+
+    public void scanElements(int size, int elements[]){
+        int i;
+
+        for(i = 0; i < size; i++){
+            elements[i] = scan.nextInt();
+        }
+    }
+
+}
