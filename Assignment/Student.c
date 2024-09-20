@@ -39,11 +39,10 @@ int main(int argc, char *argv[]) {
 
 void display(stude s[], int size) {
     int i, j;
-    int alreadyDisplayed[size]; // Array to keep track of already displayed IDs
-    int count = 0; // Number of unique IDs encountered
+    int alreadyDisplayed[size]; 
+    int count = 0; 
 
     for (i = 0; i < size; i++) {
-        // Check if the ID number has already been displayed
         int duplicate = 0;
         for (j = 0; j < count; j++) {
             if (s[i].idno == alreadyDisplayed[j]) {
@@ -52,14 +51,12 @@ void display(stude s[], int size) {
             }
         }
 
-        // If it's not a duplicate, display it and add the ID to the list
+       
         if (!duplicate) {
             printf("Name: %s\t", s[i].name);
             printf("Id Number: %d\t", s[i].idno);
             printf("Age: %d\t", s[i].age);
             printf("\n");
-
-            // Add the current ID to the already displayed list
             alreadyDisplayed[count] = s[i].idno;
             count++;
         }
